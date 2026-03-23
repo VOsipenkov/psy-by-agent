@@ -179,3 +179,58 @@
 3) интеграция с Ollama/Qwen,
 4) разработка frontend (React),
 5) сквозное тестирование пользовательского сценария.
+
+## 15. Текущий статус реализации
+Уже реализовано:
+- backend-каркас на Java 17 + Spring Boot 3 + Gradle;
+- JWT-аутентификация (`/api/auth/register`, `/api/auth/login`);
+- сущности JPA, репозитории и Flyway-миграция `V1__init.sql`;
+- API сессий снов и сообщений;
+- интеграция backend с локальным Ollama (`/api/chat`);
+- автосоздание тестового пользователя `admin/admin`;
+- базовый frontend (React) с экранами:
+  - регистрация/вход,
+  - список снов,
+  - чат,
+  - завершение обсуждения.
+
+## 16. Локальный запуск (первый инкремент)
+
+### 16.1 PostgreSQL
+```bash
+docker compose up -d
+```
+
+### 16.2 Ollama и модель
+```bash
+ollama pull qwen2.5:7b
+ollama run qwen2.5:7b
+```
+
+### 16.3 Backend
+В каталоге `backend`:
+```bash
+./gradlew bootRun
+```
+Если wrapper еще не создан, можно использовать локальный Gradle:
+```bash
+gradle bootRun
+```
+
+Backend URL: `http://localhost:8080`
+
+### 16.4 Frontend
+В каталоге `frontend`:
+```bash
+npm install
+npm run dev
+```
+
+Frontend URL: `http://localhost:5173`
+
+## 17. Ближайшие задачи
+- добавить `gradlew`/`gradlew.bat` в репозиторий;
+- улучшить обработку ошибок интеграции с Ollama;
+- добавить тесты сервисов и контроллеров;
+- реализовать более аккуратный UX создания новой сессии без `prompt`;
+- подготовить production-конфигурацию и переменные окружения.
