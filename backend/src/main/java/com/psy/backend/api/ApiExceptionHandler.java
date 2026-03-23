@@ -2,6 +2,7 @@ package com.psy.backend.api;
 
 import java.util.Map;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,9 +19,11 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(IllegalStateException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public Map<String, String> handleIllegalState(IllegalStateException e) {
-        return Map.of("error", e.getMessage());
+    public ResponseEntity<Map<String, String>> handleIllegalState(IllegalStateException e) {
+        HttpStatus status = e.getMessage() != null && e.getMessage().contains("Ollama недоступна")
+                ? HttpStatus.SERVICE_UNAVAILABLE
+                : HttpStatus.CONFLICT;
+        return ResponseEntity.status(status).body(Map.of("error", e.getMessage()));
     }
 
     @ExceptionHandler(AccessDeniedException.class)

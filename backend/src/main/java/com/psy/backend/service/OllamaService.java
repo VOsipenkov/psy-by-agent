@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientException;
 
 @Service
 public class OllamaService {
@@ -41,11 +42,16 @@ public class OllamaService {
             messages.add(m);
         }
 
-        var response = ollamaClient.post()
-                .uri("/api/chat")
-                .body(new OllamaChatRequest(model, messages, false))
-                .retrieve()
-                .body(OllamaChatResponse.class);
+        OllamaChatResponse response;
+        try {
+            response = ollamaClient.post()
+                    .uri("/api/chat")
+                    .body(new OllamaChatRequest(model, messages, false))
+                    .retrieve()
+                    .body(OllamaChatResponse.class);
+        } catch (RestClientException e) {
+            throw new IllegalStateException("Ollama недоступна. Проверь, что сервис запущен локально.", e);
+        }
 
         if (response == null || response.message() == null) {
             throw new IllegalStateException("Пустой ответ от Ollama");

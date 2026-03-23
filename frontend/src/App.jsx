@@ -56,6 +56,7 @@ function AppShell({ username, onLogout }) {
   const [activeId, setActiveId] = useState(null);
   const [activeDream, setActiveDream] = useState(null);
   const [message, setMessage] = useState('');
+  const [newDreamTitle, setNewDreamTitle] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -78,10 +79,11 @@ function AppShell({ username, onLogout }) {
   }, []);
 
   async function createNewDream() {
-    const title = prompt('Название сна:', 'Новый сон');
+    const title = newDreamTitle.trim();
     if (!title) return;
     try {
       const created = await createDream(title);
+      setNewDreamTitle('');
       await refreshDreams();
       await openDream(created.id);
     } catch (e) {
@@ -123,7 +125,14 @@ function AppShell({ username, onLogout }) {
       <aside className="sidebar">
         <div className="sidebar-top">
           <strong>{username}</strong>
-          <button onClick={createNewDream}>Новый сон</button>
+          <input
+            value={newDreamTitle}
+            onChange={(e) => setNewDreamTitle(e.target.value)}
+            placeholder="Название нового сна"
+          />
+          <button onClick={createNewDream} disabled={!newDreamTitle.trim()}>
+            Новый сон
+          </button>
           <button className="ghost" onClick={onLogout}>
             Выйти
           </button>
