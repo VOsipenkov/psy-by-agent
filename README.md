@@ -234,3 +234,22 @@ Frontend URL: `http://localhost:5173`
 - добавить тесты сервисов и контроллеров;
 - реализовать более аккуратный UX создания новой сессии без `prompt`;
 - подготовить production-конфигурацию и переменные окружения.
+
+## 18. Переменные окружения
+
+### 18.1 Backend (`backend/src/main/resources/application.yml`)
+Можно переопределять значения через env:
+- `SERVER_PORT` (по умолчанию `8080`)
+- `SPRING_DATASOURCE_URL` (по умолчанию `jdbc:postgresql://localhost:5432/psy_db`)
+- `SPRING_DATASOURCE_USERNAME` (по умолчанию `psy_user`)
+- `SPRING_DATASOURCE_PASSWORD` (по умолчанию `psy_pass`)
+- `APP_JWT_SECRET`
+- `APP_JWT_EXPIRATION_MS` (по умолчанию `86400000`)
+- `APP_OLLAMA_BASE_URL` (по умолчанию `http://localhost:11434`)
+- `APP_OLLAMA_MODEL` (по умолчанию `qwen2.5:7b`)
+
+### 18.2 Frontend
+Создай файл `.env` в каталоге `frontend` на основе `frontend/.env.example`:
+```bash
+VITE_API_BASE_URL=http://localhost:8080/api
+```
