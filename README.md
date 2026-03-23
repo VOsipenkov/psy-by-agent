@@ -253,3 +253,15 @@ Frontend URL: `http://localhost:5173`
 ```bash
 VITE_API_BASE_URL=http://localhost:8080/api
 ```
+
+## 19. Чеклист до релиза MVP
+- [x] Базовый backend (Spring Boot 3, Security, JPA, Flyway)
+- [x] Базовый frontend (React, auth, список снов, чат)
+- [x] Интеграция с локальным Ollama/Qwen
+- [x] Тестовый пользователь `admin/admin`
+- [x] Unit-тесты сервисов (`AuthService`, `DreamService`)
+- [x] Интеграционные API-тесты контроллеров (`MockMvc`)
+- [ ] Сквозной ручной прогон на локальной машине (DB + backend + frontend + Ollama)
+- [ ] Улучшить формат ошибок API до единой структуры с кодами
+- [ ] Добавить health endpoint и проверку доступности Ollama
+- [ ] Подготовить Dockerfile для backend/frontend (опционально)
