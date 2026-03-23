@@ -1,0 +1,152 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.auth-wrap {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.card {
+  width: 360px;
+  background: #1e293b;
+  border-radius: 10px;
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  background: #0b1220;
+  color: #e2e8f0;
+}
+
+button {
+  padding: 10px;
+  border: 0;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+button.ghost {
+  background: #334155;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  height: 100vh;
+}
+
+.sidebar {
+  border-right: 1px solid #334155;
+  padding: 12px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+}
+
+.sidebar-top {
+  display: grid;
+  gap: 8px;
+}
+
+.dream-list {
+  overflow: auto;
+  display: grid;
+  gap: 8px;
+}
+
+.dream-item {
+  text-align: left;
+  background: #1e293b;
+}
+
+.dream-item.active {
+  outline: 2px solid #2563eb;
+}
+
+.chat {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 10px;
+  padding: 12px;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.messages {
+  overflow: auto;
+  display: grid;
+  gap: 8px;
+  background: #111827;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.msg {
+  background: #1e293b;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.msg.me {
+  border-left: 4px solid #22c55e;
+}
+
+.msg.bot {
+  border-left: 4px solid #f59e0b;
+}
+
+.final {
+  background: #1e293b;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.composer textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.error {
+  color: #fda4af;
+}
+
+.empty {
+  display: grid;
+  place-items: center;
+  height: 100%;
+}

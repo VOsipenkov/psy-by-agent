@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: psy-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: psy_db
+      POSTGRES_USER: psy_user
+      POSTGRES_PASSWORD: psy_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - psy_pg_data:/var/lib/postgresql/data
+
+volumes:
+  psy_pg_data:
